@@ -1,7 +1,8 @@
 Grib2RDS <- function(years=1979:1980, ncores= 4, 
                      path.Grib='./',
                      path.Temp=file.path(path.Grib, 'gribTemp'), 
-                     path.RDS=path.Grib){
+                     path.RDS=path.Grib,
+                     ...){
 #rm(list=ls());
 #years=1979:1980;
 #ncores= 4
@@ -58,7 +59,7 @@ x= foreach ( i = 1:ny ) %do% {
         message('\n\tJday = ', jday) 
         for ( i in  1:nf){
             fn = files[i]
-            x=read.grib(fn = fn, tmpfile=tmpfile)
+            x=read.grib(fn = fn, tmpfile=tmpfile, ...)
             message(i,'/', nf, "\t", fn,"\t", x$time);
             ydat[[i]] = x;
         }
